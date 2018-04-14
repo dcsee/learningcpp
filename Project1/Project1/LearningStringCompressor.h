@@ -12,4 +12,3 @@ public:
 	static void compress(const std::string& toCompress);
 	static void printCharAndCount(char charType, int charCount);
 };
-

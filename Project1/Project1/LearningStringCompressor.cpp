@@ -61,4 +61,3 @@ void LearningStringCompressor::printCharAndCount(char charType, int charCount) {
 		std::cout << charCount;
 	}
 }
-
