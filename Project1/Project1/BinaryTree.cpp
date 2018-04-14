@@ -4,7 +4,57 @@
 using namespace std;
 
 
-BinaryTree::BinaryTree(int data)
+BinaryTree::BinaryTree(int data) {
+	this->root = new BinaryTreeNode(data);
+	this->maxDepth = 1;
+}
+
+
+BinaryTree::~BinaryTree() {
+	delete root;
+}
+
+
+int BinaryTree::getDepth() {
+	return this->maxDepth;
+}
+
+
+BinaryTreeNode* BinaryTree::getRoot() {
+	return this->root;
+}
+
+
+int BinaryTree::addNode(BinaryTreeNode* currentNode, int data) {
+	if (data < currentNode->getData()) {
+		BinaryTreeNode* leftBranch = currentNode->getLeftBranch();
+		if (leftBranch == NULL) {
+			currentNode->setLeftBranch(new BinaryTreeNode(data));
+			return 1;
+		}
+		else {
+			return 1 + addNode(leftBranch, data);
+		}
+	}
+	else {
+		BinaryTreeNode* rightBranch = currentNode->getRightBranch();
+		if (rightBranch == NULL) {
+			currentNode->setRightBranch(new BinaryTreeNode(data));
+			return 1;
+		}
+		else {
+			return 1 + addNode(rightBranch, data);
+		}
+	}
+}
+
+
+void BinaryTree::insert(int data) {
+	int depth = 1 + addNode(root, data);
+	this->maxDepth = (depth > maxDepth) ? depth : maxDepth;
+}
+
+BinaryTreeNode::BinaryTreeNode(int data)
 {
 	this->data = data;
 	this->leftBranch = NULL;
@@ -12,7 +62,7 @@ BinaryTree::BinaryTree(int data)
 }
 
 
-BinaryTree::~BinaryTree()
+BinaryTreeNode::~BinaryTreeNode()
 {
 	if (this->leftBranch != NULL) {
 		delete this->leftBranch;
@@ -23,55 +73,31 @@ BinaryTree::~BinaryTree()
 }
 
 
-int BinaryTree::getData() {
+int BinaryTreeNode::getData() {
 	return this->data;
 }
 
 
-int BinaryTree::getBranchFactor() {
-	return this->branchFactor;
-}
-
-
-BinaryTree* BinaryTree::getLeftBranch() {
+BinaryTreeNode* BinaryTreeNode::getLeftBranch() {
 	return this->leftBranch;
 }
 
 
-BinaryTree* BinaryTree::getRightBranch() {
+BinaryTreeNode* BinaryTreeNode::getRightBranch() {
 	return this->rightBranch;
 }
 
 
-void BinaryTree::setLeftBranch(BinaryTree* tree) {
+void BinaryTreeNode::setLeftBranch(BinaryTreeNode* tree) {
 	this->leftBranch = tree;
 }
 
-void BinaryTree::setRightBranch(BinaryTree* tree) {
+void BinaryTreeNode::setRightBranch(BinaryTreeNode* tree) {
 	this->rightBranch = tree;
 }
 
 
-void BinaryTree::addNode(int d) {
-	if (d < data) {
-		if (leftBranch == NULL) {
-			leftBranch = new BinaryTree(d);
-		}
-		else {
-			leftBranch->addNode(d);
-		}
-	} else {
-		if (rightBranch == NULL) {
-			rightBranch = new BinaryTree(d);
-		}
-		else {
-			rightBranch->addNode(d);
-		}
-	}
-}
-
-
-int BinaryTree::calculateDepth(BinaryTree* tree) {
+int BinaryTree::calculateDepth(BinaryTreeNode* tree) {
 	int depth = 0;
 	if (tree != NULL) {
 		depth = 1;
@@ -83,8 +109,12 @@ int BinaryTree::calculateDepth(BinaryTree* tree) {
 }
 
 
+int BinaryTree::calculateDepth(BinaryTree* tree) {
+	return BinaryTree::calculateDepth(tree->getRoot());
+}
 
-void BinaryTree::inorder(BinaryTree* tree) {
+
+void BinaryTree::inorder(BinaryTreeNode* tree) {
 
 	//go left as far as you can
 	//print the current node when you can't go left anymore
@@ -101,8 +131,13 @@ void BinaryTree::inorder(BinaryTree* tree) {
 }
 
 
+void BinaryTree::inorder(BinaryTree* tree) {
+	BinaryTree::inorder(tree->getRoot());
+}
 
-void fillNodeVector(BinaryTree* tree, vector<BinaryTree*> &nodeVector) {
+
+
+void fillNodeVector(BinaryTreeNode* tree, vector<BinaryTreeNode*> &nodeVector) {
 	//fill the vector using inorder traversal, to get all the nodes
 	//in sorted order
 
@@ -114,7 +149,7 @@ void fillNodeVector(BinaryTree* tree, vector<BinaryTree*> &nodeVector) {
 	fillNodeVector(tree->getRightBranch(), nodeVector);
 }
 
-BinaryTree* buildSortedTree(vector<BinaryTree*> &nodeVector, int start, int end) {
+BinaryTreeNode* buildSortedTree(vector<BinaryTreeNode*> &nodeVector, int start, int end) {
 	
 	if (start > end) {
 		return NULL;
@@ -122,7 +157,7 @@ BinaryTree* buildSortedTree(vector<BinaryTree*> &nodeVector, int start, int end)
 
 	//progressively make the median of the vector be the new root for each subtree
 	int middle = (start + end) / 2;
-	BinaryTree* newRoot = nodeVector[middle];
+	BinaryTreeNode* newRoot = nodeVector[middle];
 	newRoot->setLeftBranch(
 		buildSortedTree(nodeVector, start, middle - 1)
 	);
@@ -132,9 +167,14 @@ BinaryTree* buildSortedTree(vector<BinaryTree*> &nodeVector, int start, int end)
 	return newRoot;
 }
 
-BinaryTree* BinaryTree::balance(BinaryTree* tree) {
 
-	vector<BinaryTree*> nodeVector = vector<BinaryTree*>();
+void BinaryTree::balance(BinaryTreeNode* tree) {
+
+	vector<BinaryTreeNode*> nodeVector = vector<BinaryTreeNode*>();
 	fillNodeVector(tree, nodeVector);
-	return buildSortedTree(nodeVector, 0, nodeVector.size() - 1);
+	buildSortedTree(nodeVector, 0, nodeVector.size() - 1);
+}
+
+void BinaryTree::balance(BinaryTree* tree) {
+	BinaryTree::balance(tree->getRoot());
 }

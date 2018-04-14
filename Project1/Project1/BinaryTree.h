@@ -1,31 +1,45 @@
 #pragma once
 #include<vector>
 
+class BinaryTreeNode;
+
 class BinaryTree
 {
 public:
 	BinaryTree(int data);
-//	NaryTree();
 	~BinaryTree();
-
-	int getBranchFactor();
-	int getData();
-	void addNode(int data);
+	int getDepth();
+	BinaryTreeNode* getRoot();
+	void insert(int data);
 	static void inorder(BinaryTree* tree);
+	static void balance(BinaryTree* tree);
 	static int calculateDepth(BinaryTree* tree);
-	BinaryTree* getLeftBranch();
-	BinaryTree* getRightBranch();
-	static BinaryTree* balance(BinaryTree* tree);
-
-	void setLeftBranch(BinaryTree* tree);
-	void setRightBranch(BinaryTree* tree);
 
 private:
-	int branchFactor;
-	int data;
-//	std::vector<NaryTree*> branches;
-	BinaryTree* leftBranch;
-	BinaryTree* rightBranch;
+	int maxDepth;
+	BinaryTreeNode * root;
+	int addNode(BinaryTreeNode* currentNode, int data);
+	static void inorder(BinaryTreeNode* tree);
+	static void balance(BinaryTreeNode* tree);
+	static int calculateDepth(BinaryTreeNode* tree);
+};
 
+class BinaryTreeNode
+{
+public:
+	BinaryTreeNode(int data);
+	~BinaryTreeNode();
+
+	int getData();
+	BinaryTreeNode* getLeftBranch();
+	BinaryTreeNode* getRightBranch();
+
+	void setLeftBranch(BinaryTreeNode* tree);
+	void setRightBranch(BinaryTreeNode* tree);
+
+private:
+	BinaryTreeNode* leftBranch;
+	BinaryTreeNode* rightBranch;
+	int data;
 };
 
