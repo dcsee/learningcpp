@@ -16,6 +16,17 @@ LearningBase::~LearningBase()
 {
 }
 
+void run(){
+	//	LearningBase::ptrArithmeticDemo();
+	//	cout << LearningBase::avgDistanceAB("abccaacabcab") << endl;
+	//	vector<string> strVector = {
+	//		"abc", "test", "vac", "bac", "london", "cba", "cav", "lon", "pst"
+	//	};
+	//	LearningBase base = LearningBase();
+	//	base.anagramSort(strVector);
+	//	cout << LearningBase::sayWhatYouSee("aadjdfddkdedmfffffvirewo");
+}
+
 int LearningBase::getId() const {
 	return id;
 }

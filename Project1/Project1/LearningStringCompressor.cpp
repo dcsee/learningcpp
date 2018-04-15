@@ -12,6 +12,15 @@ LearningStringCompressor::~LearningStringCompressor()
 {
 }
 
+void run(){
+	//	std::cout << "Original: aaaabbcccdefffg" << std::endl;
+	//	std::cout << "Expected: a4b2c3def3g" << std::endl;
+	//	std::cout << "Compressed: ";
+	
+	//	LearningStringCompressor::compress("aaaabbcccdefffg");
+
+}
+
 const std::string LearningStringCompressor::virtualTalk() {
 	return "\nLearningStringCompressor: I implement the virtual function.\n";
 }

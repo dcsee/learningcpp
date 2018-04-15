@@ -3,9 +3,9 @@ using namespace std;
 #include <sstream>
 #include <vector>
 #include <queue>
-#include "LearningBase.h"
 #include "Interview.h"
 #include "BinaryTree.h"
+#include "NAryTree.h"
 
 std::vector<std::vector<int>> findRepeatedComponents(const std::string& input) {
 	//"redblredblredred" -> "ababaa"
@@ -108,29 +108,8 @@ void bitshift() {
 }
 
 int main(int argc, const char * argv[]) {
-
-//	bitshift();
-
-//	std::cout << "Original: aaaabbcccdefffg" << std::endl;
-//	std::cout << "Expected: a4b2c3def3g" << std::endl;
-//	std::cout << "Compressed: ";
-
-//	LearningStringCompressor::compress("aaaabbcccdefffg");
-
 //	findRepeatedComponents("abba");
 
-//	const char* numberWords[] = { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
-
-//	LearningBase::ptrArithmeticDemo();
-//	cout << LearningBase::avgDistanceAB("abccaacabcab") << endl;
-//	vector<string> strVector = {
-//		"abc", "test", "vac", "bac", "london", "cba", "cav", "lon", "pst"
-//	};
-//	LearningBase base = LearningBase();
-//	base.anagramSort(strVector);
-//	cout << LearningBase::sayWhatYouSee("aadjdfddkdedmfffffvirewo");
-
-//	Interview::sortMapByKey();
 
 	/*
 	BinaryTree* tree = new BinaryTree(10);
@@ -156,50 +135,31 @@ int main(int argc, const char * argv[]) {
 	BinaryTree::inorder(tree);
 	cout << endl << "depth: " << BinaryTree::calculateDepth(tree);
 	
-	
-	
 	delete tree;*/
 
+	
+	NAryTree* tree = new NAryTree(1, 3);
+
+	//should say it couldn't find it
+	tree->find(10);
+	
+	tree->create(1, 2);	//should do this ok
+	tree->create(1, 3);	//should work
+	
+	NAryTreeNode* root = tree->find(1);
+	cout << "root depth: " << root->getDepth() << endl;	//should be 1
+	
+	NAryTreeNode* child = tree->find(3);
+	cout << "child depth: " << child->getDepth() << endl; 	//should be 2
+	
+	tree->create(1, 3);	//should NOT work because key is duplicate
+	tree->create(2, 3);	//should NOT work
+	tree->create(2, 4);	//should work
+	tree->create(4, 5);	//should NOT work because depth is too much
+	
+	
 //	AlgorithmPractice::shuntingYard("hello bob");
 	
-	//add "find smallest integer of rotated sorted array" here.
-	vector<int> a0 = {2, 3, 4, 5, 6, 7, 8, 9, 1};
-	vector<int> a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-	vector<int> a2 = {9, 1, 2, 3, 4, 5, 6, 7, 8};
-	vector<int> a3 = {8, 9, 1, 2, 3, 4, 5, 6, 7};
-	vector<int> a4 = {7, 8, 9, 1, 2, 3, 4, 5, 6};
-	vector<int> a5 = {6, 7, 8, 9, 1, 2, 3, 4, 5};
-	vector<int> a6 = {5, 6, 7, 8, 9, 1, 2, 3, 4};
-	vector<int> a7 = {4, 5, 6, 7, 8, 95, 1, 2, 3};
-	vector<int> a8 = {2, 2, 2, 6, 7, 8, 9, 1, 2};
-	vector<int> a9 = {2, 3, 4, 5, 6, 7, 8, 9, 1};
-	vector<int> a10 = {7, 7, 7, 7, 7, 7, 7, 7};
-	vector<int> a11 = {1, 7, 7, 7, 7, 7, 7, 7, 7};
-	vector<int> a12 = {2, 7, 7, 7, 7, 7, 7, 7, 7, 1};
-
-	vector<int> aa = {1};
-	vector<int> ab = {2, 3};
-	vector<int> ac = {3, 2};
-	vector<int> ad = {10, 11, 4, 5, 5, 5, 5, 6, 7, 8, 9, 9};
-
-
-	cout << "a0: " << Interview::smallestInRotatedSortedArray(a0) << ", should be 1 " << endl;
-	cout << "a1: " << Interview::smallestInRotatedSortedArray(a1) << ", should be 1 " << endl;
-	cout << "a2: " << Interview::smallestInRotatedSortedArray(a2) << ", should be 1 " << endl;
-	cout << "a3: " << Interview::smallestInRotatedSortedArray(a3) << ", should be 1 " << endl;
-	cout << "a4: " << Interview::smallestInRotatedSortedArray(a4) << ", should be 1 " << endl;
-	cout << "a5: " << Interview::smallestInRotatedSortedArray(a5) << ", should be 1 " << endl;
-	cout << "a6: " << Interview::smallestInRotatedSortedArray(a6) << ", should be 1 " << endl;
-	cout << "a7: " << Interview::smallestInRotatedSortedArray(a7) << ", should be 1 " << endl;
-	cout << "a8: " << Interview::smallestInRotatedSortedArray(a8) << ", should be 1 " << endl;
-	cout << "a9: " << Interview::smallestInRotatedSortedArray(a9) << ", should be 1 " << endl;
-	cout << "a10: " << Interview::smallestInRotatedSortedArray(a10) << ", should be 7 " << endl;
-	cout << "a11: " << Interview::smallestInRotatedSortedArray(a11) << ", should be 1 " << endl;
-	cout << "a12: " << Interview::smallestInRotatedSortedArray(a12) << ", should be 1 " << endl;
-	cout << "aa: " << Interview::smallestInRotatedSortedArray(aa) << ", should be 1 " << endl;
-	cout << "ab: " << Interview::smallestInRotatedSortedArray(ab) << ", should be 2 " << endl;
-	cout << "ac: " << Interview::smallestInRotatedSortedArray(ac) << ", should be 2 " << endl;
-	cout << "ad: " << Interview::smallestInRotatedSortedArray(ad) << ", should be 4 " << endl;
 //	while (1);
 	return 0;
 }

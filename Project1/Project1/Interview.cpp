@@ -6,6 +6,8 @@
 #include <string>
 #include <set>
 
+using namespace std;
+
 Interview::Interview()
 {
 }
@@ -13,6 +15,48 @@ Interview::Interview()
 
 Interview::~Interview()
 {
+}
+
+void run(){
+	
+	//add "find smallest integer of rotated sorted array" here.
+	vector<int> a0 = {2, 3, 4, 5, 6, 7, 8, 9, 1};
+	vector<int> a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+	vector<int> a2 = {9, 1, 2, 3, 4, 5, 6, 7, 8};
+	vector<int> a3 = {8, 9, 1, 2, 3, 4, 5, 6, 7};
+	vector<int> a4 = {7, 8, 9, 1, 2, 3, 4, 5, 6};
+	vector<int> a5 = {6, 7, 8, 9, 1, 2, 3, 4, 5};
+	vector<int> a6 = {5, 6, 7, 8, 9, 1, 2, 3, 4};
+	vector<int> a7 = {4, 5, 6, 7, 8, 95, 1, 2, 3};
+	vector<int> a8 = {2, 2, 2, 6, 7, 8, 9, 1, 2};
+	vector<int> a9 = {2, 3, 4, 5, 6, 7, 8, 9, 1};
+	vector<int> a10 = {7, 7, 7, 7, 7, 7, 7, 7};
+	vector<int> a11 = {1, 7, 7, 7, 7, 7, 7, 7, 7};
+	vector<int> a12 = {2, 7, 7, 7, 7, 7, 7, 7, 7, 1};
+	
+	vector<int> aa = {1};
+	vector<int> ab = {2, 3};
+	vector<int> ac = {3, 2};
+	vector<int> ad = {10, 11, 4, 5, 5, 5, 5, 6, 7, 8, 9, 9};
+	
+	
+	cout << "a0: " << Interview::smallestInRotatedSortedArray(a0) << ", should be 1 " << endl;
+	cout << "a1: " << Interview::smallestInRotatedSortedArray(a1) << ", should be 1 " << endl;
+	cout << "a2: " << Interview::smallestInRotatedSortedArray(a2) << ", should be 1 " << endl;
+	cout << "a3: " << Interview::smallestInRotatedSortedArray(a3) << ", should be 1 " << endl;
+	cout << "a4: " << Interview::smallestInRotatedSortedArray(a4) << ", should be 1 " << endl;
+	cout << "a5: " << Interview::smallestInRotatedSortedArray(a5) << ", should be 1 " << endl;
+	cout << "a6: " << Interview::smallestInRotatedSortedArray(a6) << ", should be 1 " << endl;
+	cout << "a7: " << Interview::smallestInRotatedSortedArray(a7) << ", should be 1 " << endl;
+	cout << "a8: " << Interview::smallestInRotatedSortedArray(a8) << ", should be 1 " << endl;
+	cout << "a9: " << Interview::smallestInRotatedSortedArray(a9) << ", should be 1 " << endl;
+	cout << "a10: " << Interview::smallestInRotatedSortedArray(a10) << ", should be 7 " << endl;
+	cout << "a11: " << Interview::smallestInRotatedSortedArray(a11) << ", should be 1 " << endl;
+	cout << "a12: " << Interview::smallestInRotatedSortedArray(a12) << ", should be 1 " << endl;
+	cout << "aa: " << Interview::smallestInRotatedSortedArray(aa) << ", should be 1 " << endl;
+	cout << "ab: " << Interview::smallestInRotatedSortedArray(ab) << ", should be 2 " << endl;
+	cout << "ac: " << Interview::smallestInRotatedSortedArray(ac) << ", should be 2 " << endl;
+	cout << "ad: " << Interview::smallestInRotatedSortedArray(ad) << ", should be 4 " << endl;
 }
 
 int smallest(int guess, int start, int end, std::vector<int> array){
